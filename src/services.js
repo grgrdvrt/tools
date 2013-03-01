@@ -29,7 +29,7 @@ var services = (function(){
 		
 		_addListener : function(type, listener)
 		{
-			this.request.addEventListener(type, tools.delegate(listener, this));
+			this.request.addEventListener(type, listener.bind(this));
 		},
 	
 		load : function(completeCallback, completeScope, errorCallback, errorScope)
@@ -74,7 +74,11 @@ var services = (function(){
 			return str;
 		},
 		
-		parse : function() { },
+		parse : function()
+		{
+			this.data = this.request.response
+			this._onParsed();
+		},
 		
 		_onParsed : function() { this.onComplete.dispatch(this); }
 	}
@@ -141,21 +145,6 @@ var services = (function(){
 			this.onProgress.dispatch(this);
 		}
 	}
-	
-	
-	
-	function ShaderLoader(url) { this.init(url); }
-	
-	ShaderLoader.prototype = {
-		
-		parse : function()
-		{
-			this.data = this.request.response;
-			this._onParsed()
-		}
-	}
-	
-	ShaderLoader.prototype.__proto__ = DataLoader.prototype;
 
 
 	function ImageLoader(url)
@@ -177,7 +166,6 @@ var services = (function(){
 	ImageLoader.prototype.__proto__ = DataLoader.prototype;
 
 	return {DataLoader:DataLoader, 
-			ShaderLoader:ShaderLoader,
 			GroupLoader:GroupLoader,
 			ImageLoader:ImageLoader};
 })();
@@ -193,7 +181,7 @@ function _onGpl(loader)
 {
 	shader = loader.data.shader;
 	image = loader.data.image;
-	init();
+	//...
 }
 
 

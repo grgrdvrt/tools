@@ -136,16 +136,20 @@ var tools = function ()
 	
 	
 	
-	function Loop(callback, scope)
+	function Loop(callback, scope, autoPlay)
 	{
 		this.onUpdate = new Signal();
-		this.onUpdate.add(callback, scope);
-		this.isPaused = true;
-		this.play();
+		if(callback)
+		{
+			this.onUpdate.add(callback, scope);
+			if(autoPlay || autoPlay == undefined) this.play();
+		}
 	}
 
 	Loop.prototype = {
 	
+		isPaused : true,
+
 		play : function()
 		{
 			this.isPaused = false;

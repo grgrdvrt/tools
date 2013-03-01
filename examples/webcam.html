@@ -1,0 +1,20 @@
+<html>
+<head>
+	<script type="text/javascript" src="../src/tools.js"></script>
+	<script type="text/javascript" src="../src/webcam.js"></script>
+</head>
+<body>
+	<script type="text/javascript">
+		var stage = new tools.Stage(700, 700);
+		var webcam = new Webcam(onWebcam, this);
+		
+		function onWebcam() { new tools.Loop(onUpdate, this); }
+
+		function onUpdate()
+		{
+			webcam.drawToCanvas(stage.out, stage.width, stage.height, false);
+		}
+		
+	</script>
+</body>
+</html>

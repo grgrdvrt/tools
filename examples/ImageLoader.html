@@ -1,0 +1,15 @@
+<html>
+<head>
+	<script type="text/javascript" src="../src/tools.js"></script>
+	<script type="text/javascript" src="../src/services.js"></script>
+</head>
+<body>
+	<script type="text/javascript">
+		function _onImage(loader)
+		{
+			document.getElementsByTagName("body")[0].appendChild(loader.data);
+		}
+		new services.ImageLoader("image.jpg").load(_onImage, this);
+	</script>
+</body>
+</html>

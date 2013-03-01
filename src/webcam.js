@@ -4,13 +4,18 @@ var Webcam = (function() {
 							navigator.webkitGetUserMedia ||
 							navigator.mozGetUserMedia ||
 							navigator.msGetUserMedia);
-	function Webcam()
+	function Webcam(onReady, onReadyScope)
 	{
 		this.onReady = new tools.Signal();
 		this.onError = new tools.Signal();
 		this.isReady = false;
 		this.video = document.createElement("video");
 		this.width, this.height, this.ratio;
+		if(onReady)
+		{
+			this.onReady.add(onReady, onReadyScope);
+			this.init();
+		}
 	}
 	
 	Webcam.prototype = {

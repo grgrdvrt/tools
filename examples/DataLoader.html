@@ -1,0 +1,16 @@
+<html>
+<head>
+	<script type="text/javascript" src="../src/tools.js"></script>
+	<script type="text/javascript" src="../src/services.js"></script>
+</head>
+<body>
+	<script type="text/javascript">
+		function _onData(loader)
+		{
+			var textNode = document.createTextNode(loader.data);
+			document.getElementsByTagName("body")[0].appendChild(textNode);
+		}
+		new services.DataLoader("data.txt").load(_onData, this);
+	</script>
+</body>
+</html>
